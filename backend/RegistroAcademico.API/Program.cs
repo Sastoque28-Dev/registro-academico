@@ -1,3 +1,4 @@
+using RegistroAcademico.Data.Services;
 using Microsoft.EntityFrameworkCore;
 using RegistroAcademico.Data;
 
@@ -10,6 +11,9 @@ builder.Services.AddSwaggerGen();
 // Registro del DbContext con la cadena de conexión
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Registro de servicios de negocio    
+builder.Services.AddScoped<EstudianteService>();
 
 var app = builder.Build();
 
