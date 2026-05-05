@@ -5,6 +5,7 @@ using RegistroAcademico.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Servicios de la aplicación
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -12,8 +13,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Registro de servicios de negocio    
+// Registro de servicios de negocio
 builder.Services.AddScoped<EstudianteService>();
+builder.Services.AddScoped<MateriaService>();
+builder.Services.AddScoped<CalificacionService>();
 
 var app = builder.Build();
 
@@ -25,5 +28,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 app.Run();
